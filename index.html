@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Campus Emergency Alert</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+  <div class="phone-frame">
+    <div class="phone-screen">
+
+      <!-- ===== SPLASH SCREEN ===== -->
+      <div id="screen-splash" class="screen active">
+        <div class="splash-bg">
+          <div class="splash-rings">
+            <div class="ring ring1"></div>
+            <div class="ring ring2"></div>
+            <div class="ring ring3"></div>
+          </div>
+          <div class="splash-content">
+            <div class="splash-logo">
+              <div class="logo-shield">
+                <svg viewBox="0 0 80 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M40 4L8 18V42C8 60 22 76 40 82C58 76 72 60 72 42V18L40 4Z" fill="url(#shieldGrad)" stroke="rgba(255,255,255,0.3)" stroke-width="1.5"/>
+                  <path d="M40 22V46M40 50V54" stroke="white" stroke-width="5" stroke-linecap="round"/>
+                  <defs>
+                    <linearGradient id="shieldGrad" x1="40" y1="4" x2="40" y2="82" gradientUnits="userSpaceOnUse">
+                      <stop offset="0%" stop-color="#E53935"/>
+                      <stop offset="100%" stop-color="#B71C1C"/>
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
+            <h1 class="splash-title">Campus<br/><span>Emergency</span><br/>Alert</h1>
+            <p class="splash-tagline">Your Safety in One Tap</p>
+            <div class="splash-loader">
+              <div class="loader-bar"><div class="loader-fill"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== LOGIN SCREEN ===== -->
+      <div id="screen-login" class="screen">
+        <div class="login-bg">
+          <div class="login-header">
+            <div class="login-logo-small">
+              <svg viewBox="0 0 60 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M30 3L6 13.5V31.5C6 45 16.5 57 30 61.5C43.5 57 54 45 54 31.5V13.5L30 3Z" fill="url(#shGrad2)"/>
+                <path d="M30 16.5V34.5M30 37.5V40.5" stroke="white" stroke-width="3.5" stroke-linecap="round"/>
+                <defs>
+                  <linearGradient id="shGrad2" x1="30" y1="3" x2="30" y2="61.5">
+                    <stop offset="0%" stop-color="#E53935"/>
+                    <stop offset="100%" stop-color="#B71C1C"/>
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+            <h2 class="login-title">Student Login</h2>
+            <p class="login-sub">Register to access emergency services</p>
+          </div>
+          <div class="login-form-card">
+            <div class="form-group">
+              <label>Full Name</label>
+              <div class="input-wrap">
+                <span class="input-icon">👤</span>
+                <input type="text" id="inp-name" placeholder="e.g. Bharath Kumar" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Student ID</label>
+              <div class="input-wrap">
+                <span class="input-icon">🎓</span>
+                <input type="text" id="inp-id" placeholder="e.g. CS2024001" />
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Phone Number</label>
+              <div class="input-wrap">
+                <span class="input-icon">📱</span>
+                <input type="tel" id="inp-phone" placeholder="e.g. +91 98765 43210" />
+              </div>
+            </div>
+            <div id="login-error" class="login-error hidden">Please fill in all fields</div>
+            <button class="btn-login" onclick="doLogin()">
+              <span>Proceed to Safety</span>
+              <span class="btn-arrow">→</span>
+            </button>
+            <p class="login-note">🔒 Your information is securely stored and only shared during emergencies.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== HOME SCREEN ===== -->
+      <div id="screen-home" class="screen">
+        <div class="home-bg">
+          <!-- Top Bar -->
+          <div class="home-topbar">
+            <div class="topbar-left">
+              <div class="user-avatar" id="user-avatar">B</div>
+              <div>
+                <p class="topbar-greeting">Hello,</p>
+                <p class="topbar-name" id="topbar-name">Student</p>
+              </div>
+            </div>
+            <div class="topbar-right">
+              <div class="status-dot"></div>
+              <span class="status-text">Safe</span>
+            </div>
+          </div>
+
+          <!-- Location Bar -->
+          <div class="location-bar" id="location-bar">
+            <span class="loc-icon">📍</span>
+            <span class="loc-text" id="loc-text">Fetching location...</span>
+            <span class="loc-refresh" onclick="refreshLocation()">↻</span>
+          </div>
+
+          <!-- Emergency Button -->
+          <div class="emergency-section">
+            <p class="emergency-label">TAP IN EMERGENCY</p>
+            <div class="emergency-btn-wrap">
+              <div class="pulse-ring pulse1"></div>
+              <div class="pulse-ring pulse2"></div>
+              <div class="pulse-ring pulse3"></div>
+              <button class="btn-emergency" id="btn-emergency" onclick="triggerEmergency()">
+                <div class="emergency-inner">
+                  <svg viewBox="0 0 24 24" fill="none" class="emer-icon">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z" fill="white"/>
+                  </svg>
+                  <span>SOS</span>
+                </div>
+              </button>
+            </div>
+            <p class="emergency-hint">Hold for 1 second to send alert</p>
+          </div>
+
+          <!-- Quick Actions -->
+          <div class="quick-actions">
+            <button class="quick-btn share-btn" onclick="shareLocation()">
+              <div class="quick-icon">📍</div>
+              <span>Share Location</span>
+            </button>
+            <button class="quick-btn call-btn" onclick="showContacts()">
+              <div class="quick-icon">📞</div>
+              <span>Call Security</span>
+            </button>
+          </div>
+
+          <!-- Contacts Section -->
+          <div class="contacts-section" id="contacts-section">
+            <h3 class="contacts-title">Quick Contacts</h3>
+            <div class="contact-cards">
+              <div class="contact-card">
+                <div class="contact-avatar sec">🛡️</div>
+                <div class="contact-info">
+                  <p class="contact-name">Campus Security</p>
+                  <p class="contact-num">+91 93613 29829</p>
+                </div>
+                <a href="tel:+919361329829" class="contact-call-btn">📞</a>
+              </div>
+              <div class="contact-card">
+                <div class="contact-avatar hos">🏠</div>
+                <div class="contact-info">
+                  <p class="contact-name">Hostel Warden</p>
+                  <p class="contact-num">+91 87541 92659</p>
+                </div>
+                <a href="tel:+918754192659" class="contact-call-btn">📞</a>
+              </div>
+              <div class="contact-card">
+                <div class="contact-avatar help">🆘</div>
+                <div class="contact-info">
+                  <p class="contact-name">College Help Desk</p>
+                  <p class="contact-num">+91 90434 37758</p>
+                </div>
+                <a href="tel:+919043437758" class="contact-call-btn">📞</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ===== ALERT SENT OVERLAY ===== -->
+      <div id="overlay-alert" class="overlay hidden">
+        <div class="alert-card">
+          <div class="alert-anim">
+            <div class="alert-ring ar1"></div>
+            <div class="alert-ring ar2"></div>
+            <div class="checkmark">✓</div>
+          </div>
+          <h2 class="alert-title">Alert Sent!</h2>
+          <p class="alert-msg" id="alert-msg">Emergency alert dispatched to Campus Security.</p>
+          <div class="alert-details" id="alert-details"></div>
+          <button class="btn-dismiss" onclick="dismissAlert()">I'm Safe Now</button>
+        </div>
+      </div>
+
+      <!-- ===== LOCATION SHARE OVERLAY ===== -->
+      <div id="overlay-location" class="overlay hidden">
+        <div class="alert-card">
+          <div class="loc-map-mock">
+            <div class="map-grid"></div>
+            <div class="map-pin">📍</div>
+            <div class="map-pulse"></div>
+          </div>
+          <h2 class="alert-title" style="color:#1A237E">Location Shared</h2>
+          <p class="alert-msg" id="loc-share-msg">Your location has been shared with Campus Security.</p>
+          <div class="alert-details" id="loc-share-details"></div>
+          <button class="btn-dismiss" style="background:linear-gradient(135deg,#1A237E,#283593)" onclick="dismissLocation()">Done</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
