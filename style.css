@@ -580,3 +580,22 @@ body {
   25% { transform: translateX(-5px) rotate(-2deg); }
   75% { transform: translateX(5px) rotate(2deg); }
 }
+
+/* ===== SHARE LOCATION: CONTACT PICKER BUTTONS ===== */
+.picker-contact-btn {
+  width: 100%;
+  color: white;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  cursor: pointer;
+  text-align: left;
+  letter-spacing: 0.2px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.picker-contact-btn:hover  { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.3); }
+.picker-contact-btn:active { transform: translateY(0);    box-shadow: 0 2px 8px  rgba(0,0,0,0.2); }
