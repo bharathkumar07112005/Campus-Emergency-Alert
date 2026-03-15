@@ -135,7 +135,7 @@
                 </div>
               </button>
             </div>
-            <p class="emergency-hint">Hold for 1 second to send alert</p>
+            <p class="emergency-hint">Hold for 1 second to send SOS alert</p>
           </div>
 
           <!-- Quick Actions -->
@@ -192,7 +192,7 @@
             <div class="checkmark">✓</div>
           </div>
           <h2 class="alert-title">Alert Sent!</h2>
-          <p class="alert-msg" id="alert-msg">Emergency alert dispatched to Campus Security.</p>
+          <p class="alert-msg" id="alert-msg">Emergency alert sent to Campus Security.</p>
           <div class="alert-details" id="alert-details"></div>
           <button class="btn-dismiss" onclick="dismissAlert()">I'm Safe Now</button>
         </div>
@@ -210,6 +210,31 @@
           <p class="alert-msg" id="loc-share-msg">Your location has been shared with Campus Security.</p>
           <div class="alert-details" id="loc-share-details"></div>
           <button class="btn-dismiss" style="background:linear-gradient(135deg,#1A237E,#283593)" onclick="dismissLocation()">Done</button>
+        </div>
+      </div>
+
+      <!-- ===== SHARE LOCATION: CONTACT PICKER OVERLAY ===== -->
+      <div id="overlay-picker" class="overlay hidden">
+        <div class="alert-card" style="gap:12px">
+          <div style="font-size:32px">📍</div>
+          <h2 class="alert-title" style="color:#1A237E;font-size:18px">Send Location To</h2>
+          <p class="alert-msg" style="font-size:12px">
+            GPS coordinates acquired.<br/>
+            <span id="picker-coords" style="font-weight:700;color:#1A237E"></span><br/>
+            <a id="picker-maplink" href="#" target="_blank" style="color:#E53935;font-size:11px">View on Google Maps →</a>
+          </p>
+          <div style="width:100%;display:flex;flex-direction:column;gap:10px;">
+            <button id="pick-security" class="picker-contact-btn" style="background:linear-gradient(135deg,#E53935,#C62828);">
+              🛡️&nbsp; College Security &nbsp;·&nbsp; 9361329829
+            </button>
+            <button id="pick-warden" class="picker-contact-btn" style="background:linear-gradient(135deg,#1A237E,#283593);">
+              🏠&nbsp; Hostel Warden &nbsp;·&nbsp; 8754192659
+            </button>
+            <button id="pick-helpdesk" class="picker-contact-btn" style="background:linear-gradient(135deg,#E65100,#BF360C);">
+              🆘&nbsp; College Help Desk &nbsp;·&nbsp; 9043437758
+            </button>
+            <button class="btn-dismiss" style="background:#888;margin-top:4px;" onclick="dismissPicker()">Cancel</button>
+          </div>
         </div>
       </div>
 
